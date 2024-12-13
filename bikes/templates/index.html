@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-3">
+    <div class="col-sm-12 bg-primary">
+        <h2 class="display-4 text-center">Úvodní stránka</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-center bg-primary text-light p-2">Top 3 kola</h2>
+        {% include "blocks/top_ten.html" %}
+    </div>
+    <div class="col-md-6">
+        <h2 class="text-center bg-primary text-light p-2">Typy kol</h2>
+        {% include "blocks/type_list.html" %}
+    </div>
+</div>
+<div class="row">
+</div>
+{% endblock %}

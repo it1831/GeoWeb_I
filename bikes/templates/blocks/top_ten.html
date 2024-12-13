@@ -1,0 +1,5 @@
+<ol class="list-group">
+    {% for cyklo in cyklos %}
+    <li class="list-group-item list-group-item-primary d-flex justify-content-between align-items-center"><a class="text-dark" href="{% url 'cyklo-detail' cyklo.id %}">{{ cyklo.name }}</a> <span class="badge badge-pill badge-primary">{{ cyklo.rate }}</span></li>
+    {% endfor %}
+</ol>

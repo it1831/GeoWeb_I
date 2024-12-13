@@ -1,0 +1,24 @@
+{% load mathfilters %}
+<div>
+    {% for cyklo in cyklos %}
+    <div class="row mt-3 mb-3 pb-2">
+        <div class="col-md-2">
+            {% if cyklo.picture %}
+            <a href="{% url 'cyklo-detail' cyklo.id %}"><img class="img-fluid" src="{{ cyklo.picture.url }}" alt="{{ cyklo.name }}"></a>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h4><a href="{% url 'cyklo-detail' cyklo.id %}">{{ cyklo.name }}</a></h4>
+            <p>{{ cyklo.description|truncatewords:30 }}</p>
+            <p class="border-top pt-2"> datum uvedení: <b>{{ cyklo.release_date }}</b></p>
+            <p>Žánry: {% for type in cyklo.types.all %}<a href="{% url 'cyklo_type' type.bike_type %}" class="btn btn-light">{{ type.bike_type }}</a> {% endfor %}</p>
+        </div>
+        <div class="col-md-2">
+            <span class="display-4">{{ cyklo.rate }}</span>
+            <div class="progress">
+                <div class="progress-bar bg-success" style="width:{{% cyklo.rate|mul:'10'|floatformat %}}"></div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

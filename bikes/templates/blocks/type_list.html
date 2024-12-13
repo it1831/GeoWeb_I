@@ -1,0 +1,5 @@
+<ul class="list-group">
+    {% for type in types %}
+    <li class="list-group-item list-group-item-info"><a class="text-dark" href="{% url 'cyklo_type' type.bike_type %}">{{ type.bike_type }}</a></li>
+    {% endfor %}
+</ul>

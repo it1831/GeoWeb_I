@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load bootstrap_pagination %}
+
+{% block title %}{{ view_title }}{% endblock %}
+
+{% block content %}
+<div class="row mt-3 mb-3 bg-primary p-3">
+    <div class="col-sm-12">
+        <h2 class="text-center">{{ view_head }}</h2>
+    </div>
+</div>
+<div class="container-fluid row">
+    {% for cyklo in cyklo_list %}
+    <div class="col-sm-12 col-xl-3  d-flex align-items-stretch">
+        <div class="card-group">
+        <div class="card">
+            {% if cyklo.picture %}
+            <img class="card-img-top" src="{{ cyklo.picture.url }}" alt="{{ cyklo.name }}">
+            {% endif %}
+            <div class="card-body">
+                <h4 class="card-title">{{ cyklo.name }}</h4>
+                <p class="card-text"><strong>Typy:</strong>
+                {% for type in cyklo.type.all %}{{ type.bike_type }}{% endfor %}
+                </p>
+                <p><strong>Hodnocení:</strong> {{ cyklo.rate }}</p>
+                <a href="{% url 'cyklo-detail' cyklo.pk %}" class="btn btn-primary">Podrobnosti</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        Celkový počet kol: {{ num_cyklos }}
+    </div>
+</div>
+
+{% if num_cyklos > 0 %}
+<div class="row">
+    <div class="col-sm-12">
+        {% bootstrap_paginate page_obj range=10 %}
+    </div>
+</div>
+{% if user.is_authenticated %}
+<div>
+    <a href="{% url 'cyklo-create' %}" class="btn btn-success">Nové kola</a>
+</div>
+{% endif %}
+{% endif %}
+
+{% endblock %}
